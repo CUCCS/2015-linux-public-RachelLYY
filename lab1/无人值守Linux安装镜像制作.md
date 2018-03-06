@@ -76,7 +76,7 @@
     find . -type f -print0 | xargs -0 md5sum > md5sum.txt
     ```
 
-* 封闭改动后的目录到.iso
+* 封闭改动后的目录重新生成.iso文件
 
   * ```shell
     # 封闭改动后的目录到.iso
@@ -105,7 +105,7 @@
   * 自动安装成功
   * ![success](success.png)
 
-* 对比官方和修改过后的文件区别
+* 使用[文本对比工具](http://mergely.com/editor)对比官方原文件和修改过后的文件区别
 
   * ![1](1.png)
   * ![2](2.png)
@@ -153,3 +153,16 @@
 * 成功免密登录
 
   * ![s](free-passwd-success.png)
+
+## 遇到的问题
+
+编辑isolinux/txt.cfg的文件时，添加的内容一定要在文件开头，否则不生效
+
+## 参考资料
+
+[psftp实现虚拟机和主机文件互传](http://blog.csdn.net/tim_phper/article/details/51428500)
+
+[师哥作业](https://github.com/CUCCS/linux/blob/master/2017-1/snRNA/ex1/%E6%97%A0%E4%BA%BA%E5%80%BC%E5%AE%88Linux%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C.md)
+
+
+
