@@ -61,16 +61,14 @@
 
 * 将修改好的ubuntu-server-autoinstall.seed复制到~/cd/preseed目录下
 
-  * 这里需要强制修改文件夹权限，否则会提示"permission denied"
-    * ```sudo chmod 777 preceed/```
+  * 这里需要暂时提权，否则会提示"permission denied"
+    * ```sudo -s  ```
 
-* 修改isolinux/isolinux.cfg，增加内容`timeout 10`
-
-  * ![timeout](timeout.png)
+* isolinux/isolinux.cfg，文件默认`timeout 0` 不需要修改
 
 * 重新生成md5sum.txt
 
-  * 这里也需要先修改其权限为777，否则无法操作
+  * 这里也需要先```sudo -s```，否则无法操作
 
   * ```shell
     find . -type f -print0 | xargs -0 md5sum > md5sum.txt
@@ -142,6 +140,7 @@
 
 * 打开'PUTTY.exe'
 
+  * ![1](login.png)
   * 'Session'-->'Logging'输入虚拟机的IP地址
   * 'Connection'-->'Data',输入自动登录的用户名
   * 'Connection'-->'SSH',加载刚刚生成的私钥文件
