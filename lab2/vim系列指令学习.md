@@ -36,13 +36,13 @@ chap7：https://asciinema.org/a/bLy3CLXmuTB2ecxUBKQurbsUv
   * 删除单个单词：```dw```
   * 从当前光标一直删除到行尾：```d$```
   * 从当前光标只删除单行：```dd```
-  * 从当前光标一直删除到当前行向下数n行：
+  * 从当前光标一直删除到当前行向下数n行：```(n+1)dd```
 
-* 在vim中快速插入N个空行：```N i<Enter><Esc><Esc>```
+* 在vim中快速插入N个空行：```Ni<Enter>```
 
 * 在vim中快速插入80个'-'：```80i-<Esc><Esc>```
 
-* 撤销最近一次编辑操作：```o```
+* 撤销最近一次编辑操作：```u```
 
 * 重做最近一次被撤销的操作：```CTRL+R```
 
@@ -67,8 +67,8 @@ chap7：https://asciinema.org/a/bLy3CLXmuTB2ecxUBKQurbsUv
 
   * 普通模式： ```/keyword```
   * 忽略大小写：```:set ic```
-  * 匹配结果高亮显示：```set hls is```
-  * 匹配结果批量替换：```s/old/new/g```
+  * 匹配结果高亮显示：```:set hls is```
+  * 匹配结果批量替换：```%s/old/new/g```
   * 在两行间批量替换：```:#,#s/old/new/g```
   * 在全文中批量替换```:%s/old/new/g```
 
