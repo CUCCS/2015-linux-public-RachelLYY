@@ -2,7 +2,8 @@
 set timeout 1
 set PASS rachel
 set USER root
-spawn sudo ssh -l $USER 192.168.137.94
+set IP [lindex $argv 0]
+spawn sudo ssh -l $USER $IP
 expect "*#*" { send "apt-get install smbclient\r" }
 expect "Y/n" { send "Y\r"}
 

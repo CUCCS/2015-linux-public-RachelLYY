@@ -8,6 +8,6 @@
 # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
 # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
 #
-/var/nfs/read_and_write *(insecure,rw,sync,no_subtree_check)
-/home *(insecure,sync,no_root_squash,no_subtree_check)
+/home/read_and_write *(insecure,rw,sync,no_subtree_check)
+/home/read_only *(insecure,sync,no_root_squash,no_subtree_check)
 

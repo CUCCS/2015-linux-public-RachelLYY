@@ -31,56 +31,56 @@
 
         * ![](img/19.png)
 
+* 配置一个支持用户名和密码方式访问的账号，该账号继承匿名访问者所有权限，且拥有对另1个独立目录及其子目录完整读写（包括创建目录、修改文件、删除文件等）权限；
 
-    * 配置一个支持用户名和密码方式访问的账号，该账号继承匿名访问者所有权限，且拥有对另1个独立目录及其子目录完整读写（包括创建目录、修改文件、删除文件等）权限；
+* 修改`/etc/proftpd/proftpd.conf`
 
-      * 修改`/etc/proftpd/proftpd.conf`
 
-        * ```shell
-          AuthOrder               mod_auth_file.c  mod_auth_unix.c
-          AuthUserFile /etc/proftpd/ftpd.passwd
-          AuthUserFile /etc/proftpd/ftpd.group
-          ```
+*  ```shell
+     AuthOrder               mod_auth_file.c  mod_auth_unix.c
+     AuthUserFile /etc/proftpd/ftpd.passwd
+     AuthUserFile /etc/proftpd/ftpd.group
+     ```
 
-      * 添加ftp虚拟用户
+  * 添加ftp虚拟用户
 
-        * ```shell
-          # 添加ftp虚拟用户ftp_passwd 使用与rachel相同的uid 目录为/home/ftp 
-          sudo ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=passwd_test --uid=1000 --home=/home/passwd_test --shell=/sbin/nologin
-          # 创建虚拟用户组
-          sudo ftpasswd --group --file=/etc/proftpd/ftpd.group --name=passwdtest_group --gid=1000
-          # 添加虚拟用户进组
-          sudo ftpasswd --group --name=passwdtest_group --gid=99 --member=passwd_test
-          ```
+    * ```shell
+      # 添加ftp虚拟用户ftp_passwd 使用与rachel相同的uid 目录为/home/ftp 
+      sudo ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=passwd_test --uid=1000 --home=/home/passwd_test --shell=/sbin/nologin
+      # 创建虚拟用户组
+      sudo ftpasswd --group --file=/etc/proftpd/ftpd.group --name=passwdtest_group --gid=1000
+      # 添加虚拟用户进组
+      sudo ftpasswd --group --name=passwdtest_group --gid=99 --member=passwd_test
+      ```
 
-      * 添加linux同名用户
+  * 添加linux同名用户
 
-        * ```
-          sudo useradd passwd_test
-          sudo passwd passwd_test
-          ```
+    * ```
+      sudo useradd passwd_test
+      sudo passwd passwd_test
+      ```
 
-      * 效果
+  * 效果
 
-        * ![](img/20.png)
+    * ![](img/20.png)
 
-    * FTP用户不能越权访问指定目录之外的任意其他目录和文件
+* FTP用户不能越权访问指定目录之外的任意其他目录和文件
 
-      * `DefaultRoot               ~`
+  * `DefaultRoot               ~`
 
-    * 匿名访问权限仅限白名单IP来源用户访问，禁止白名单IP以外的访问；
+* 匿名访问权限仅限白名单IP来源用户访问，禁止白名单IP以外的访问；
 
-      * 修改配置文件
+  * 修改配置文件
 
-        * anonymous模块中加入
+    * anonymous模块中加入
 
-        * ```shell
-          <Limit LOGIN ~ftp/*>
-          Order allow,deny
-          Allow from 192.168.137.207
-          Deny from all
-          </Limit>
-          ```
+    * ```shell
+      <Limit LOGIN ~ftp/*>
+      Order allow,deny
+      Allow from 192.168.137.207
+      Deny from all
+      </Limit>
+      ```
 
 
 * **NFS**
@@ -96,7 +96,7 @@
         * `/var/nfs/common 192.168.137.207(rw,sync,no_subtree_check)`
         * 报错：`mount.nfs: access denied by server while mounting`
         * 解决方案
-          * 添加insecure选项，ip地址改为*
+          * 添加insecure选项，ip地址改为
           * `/var/nfs/common *(insecure,rw,sync,no_subtree_check)`
           * 并且客户机和服务器使用同名用户，确保其有两个共享的文件夹（挂载的文件夹和被挂载的文件夹）及其子文件的读写权限
         * 配置文件/etc/exports
@@ -133,7 +133,7 @@
 
       * ![](img/24.png)
 
-    * server	
+      	server	
 
       * 安装`apt-get install isc-dhcp-server`
 
@@ -145,7 +145,7 @@
            address 10.5.5.2
            netmask 255.255.255.0
            gateway 10.0.5.2
-          ```
+           ```
 
       * 修改/etc/default/isc-dhcp-server
 
@@ -254,6 +254,11 @@
     * ![](img/26.png)
     * ![](img/27.png)
     * ![](img/28.png)
+* 主要问题
+  * dhcp的自动安装
+    * 由于目标机器的网卡名未知，如果直接将配置文件/etc/network/interfaces拷贝过去，可能导致网络无法使用，进而影响dhcp的服务
+    * 目前还未想到解决办法
+    * 目前的虚拟机中，网卡名称相同。
 
 
 
