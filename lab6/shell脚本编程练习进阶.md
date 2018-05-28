@@ -1,4 +1,4 @@
-#第六章：FTP、NFS、DHCP、DNS、Samba服务器的自动安装与自动配置
+# 第六章：FTP、NFS、DHCP、DNS、Samba服务器的自动安装与自动配置
 
 ## 实验过程
 
